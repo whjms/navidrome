@@ -34,6 +34,18 @@ const wrapperDataProvider = {
     return dataProvider.getList(r, p)
   },
   getOne: (resource, params) => {
+    if (resource === "playlistTrack") {
+      const urlParams = params.id ? `?id=${params.id}` : '';
+      const url = `api/playlist/${params.filter.playlist_id}/tracks/` + urlParams;
+      return httpClient(url).then(resp => {
+        return {
+          data: {
+            id: params.filter.playlist_id,
+            tracks: resp.json
+          }
+        }
+      });
+    }
     const [r, p] = mapResource(resource, params)
     return dataProvider.getOne(r, p)
   },
