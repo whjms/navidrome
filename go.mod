@@ -52,5 +52,3 @@ require (
 	gopkg.in/djherbis/atime.v1 v1.0.0 // indirect
 	gopkg.in/djherbis/stream.v1 v1.3.1
 )
-
-replace github.com/dhowden/tag => github.com/wader/tag v0.0.0-20200426234345-d072771f6a51
