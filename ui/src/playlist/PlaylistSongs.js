@@ -103,6 +103,20 @@ const PlaylistSongs = ({ playlistId, readOnly, actions, ...props }) => {
     [playlistId, refetch]
   )
 
+  const removeFromPlaylist = (track) => {
+    dataProvider.delete('playlistTrack', {
+      id: track.id,
+      filter: { playlist_id: playlistId,}
+    })
+    .then(() => {
+      refetch()
+    })
+    .catch((e) => {
+      console.log('failed to delete track from playlist: ' + e)
+      notify('ra.page.error', 'warning')
+    })
+  }
+
   const reorder = useCallback(
     (playlistId, id, newPos) => {
       dataProvider
@@ -208,6 +222,7 @@ const PlaylistSongs = ({ playlistId, readOnly, actions, ...props }) => {
                 onAddToPlaylist={onAddToPlaylist}
                 showLove={false}
                 className={classes.contextMenu}
+                onRemoveFromPlayList={removeFromPlaylist}
               />
             </SongDatagrid>
           </ReorderableList>

@@ -58,6 +58,12 @@ const wrapperDataProvider = {
     return dataProvider.create(r, p)
   },
   delete: (resource, params) => {
+    if (resource === "playlistTrack") {
+      return httpClient(`api/playlist/${params.filter.playlist_id}/tracks/?id=${params.id}`, {
+        method: 'DELETE',
+      }).then(resp => { return { data: resp } })
+    }
+
     const [r, p] = mapResource(resource, params)
     return dataProvider.delete(r, p)
   },

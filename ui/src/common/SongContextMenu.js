@@ -30,6 +30,7 @@ export const SongContextMenu = ({
   showLove,
   onAddToPlaylist,
   className,
+  onRemoveFromPlayList,
 }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -73,6 +74,11 @@ export const SongContextMenu = ({
       enabled: true,
       label: translate('resources.song.actions.info'),
       action: (record) => dispatch(openExtendedInfoDialog(record)),
+    },
+    removeFromPlaylist: {
+      enabled: onRemoveFromPlayList,
+      label: "Remove from playlist",
+      action: (record) => onRemoveFromPlayList(record),
     },
   }
 
@@ -129,6 +135,7 @@ SongContextMenu.propTypes = {
   resource: PropTypes.string.isRequired,
   record: PropTypes.object.isRequired,
   onAddToPlaylist: PropTypes.func,
+  onRemoveFromPlayList: PropTypes.func,
   showLove: PropTypes.bool,
 }
 
